@@ -27,11 +27,11 @@
 
             <div class="row mb-3 float-right">
                 <div class="col mr-2">
-                    <form action="" method="post">
+                    <form action="<?= base_url('sumberpokok'); ?>" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Cari data. . ." name="cari">
+                            <input type="text" class="form-control" placeholder="Cari data. . ." name="cari" autocomplete="off" autofocus>
                             <div class="input-group-append">
-                                <button class="btn text-white" type="submit" style="background-color: #F4A460">Cari</button>
+                                <button class="btn text-white" type="submit" style=" background-color: #F4A460">Cari</button>
                             </div>
                         </div>
                     </form>
@@ -40,8 +40,12 @@
 
 
 
+
             <button class="btn btn-sm mb-3" style="background-color: #F4A460">
                 <a class="nav-link text-white" href="<?= base_url('sumberpokok/tambah'); ?>">Tambah Data Makanan</a></button>
+
+
+            <h6>Total Data : <?= $total_rows; ?></h6>
 
 
 
@@ -53,10 +57,18 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" colo id="dataTable" width="100%" cellspacing="0">
-                                <?php $Id = 1; ?>
+
+                                <!--apabila saat pencarian datanya tidak ada -->
+                                <?php if (empty($sumberpokok)) : ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        Data tidak ditemukan!
+                                    </div>
+
+                                <?php endif ?>
+
                                 <?php foreach ($sumberpokok as $row) : ?>
                                     <td>
-                                        <center><?= $Id ?> </center>
+                                        <center><?= ++$start ?> </center>
                                     </td>
                                     <td>
                                         <center><?= $row["Nama_Pangan"]; ?></center>
@@ -79,16 +91,15 @@
 
 
                                     <td>
+                                        <center>
+                                            <a href="<?= base_url('sumberpokok/ubah/'); ?><?= $row['Id']; ?>" class="badge text-white" style="background-color: #F4A460">Ubah</a>
 
-                                        <a href="<?= base_url('sumberpokok/ubah/'); ?><?= $row['Id']; ?>" class="badge text-white float-left" style="background-color: #F4A460">Ubah</a>
-
-
-
-                                        <a href="<?= base_url(('sumberpokok/hapus/' . $row['Id'])); ?>" class="badge badge-danger float-right" onclick="return confirm('Anda Yakin ?');">Hapus</a>
+                                            <a href="<?= base_url(('sumberpokok/hapus/' . $row['Id'])); ?>" class="badge badge-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
+                                        </center>
                                     </td>
                                     </tr>
 
-                                    <?php $Id++; ?>
+
                                 <?php endforeach; ?>
                         </div>
 
@@ -126,17 +137,8 @@
                     </div>
                     <p>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="<?= base_url('sumberpokok'); ?>">Sumber Pokok</a></li>
-                            <li class="page-item"><a class="page-link" href="<?= base_url('sumberhewani'); ?>">Sumber Hewani</a></li>
-                            <li class="page-item"><a class="page-link" href="<?= base_url('sumbernabati'); ?>">Sumber Nabati</a></li>
-                            <li class="page-item"><a class="page-link" href="<?= base_url('buah'); ?>">Buah</a></li>
-                            <li class="page-item"><a class="page-link" href="<?= base_url('sayur'); ?>">Sayur</a></li>
-                        </ul>
-                    </nav>
-
-                    <!-- /.container-fluid -->
+                        <?= $this->pagination->create_links(); ?>
+                        <!-- /.container-fluid -->
                 </div>
 
             </div>

@@ -101,7 +101,7 @@ class Auth extends CI_Controller
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 1,
-                'date_created' => time()
+                'date_created' => date('d F Y')
             ];
 
             $this->db->insert('user', $data);

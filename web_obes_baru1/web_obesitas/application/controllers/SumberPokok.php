@@ -11,20 +11,57 @@ class SumberPokok extends CI_Controller
     }
 
 
-
     //UNTUK SUMBER P0KOK
 
     public function index()
     //method defauld
     {
+        $this->load->model('Pokok_Model', 'sumberpokok');
 
         $data['title'] = 'Data Makanan - Sumber Pokok';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-        $data['sumberpokok'] = $this->Pokok_model->getAllSumberPokok();
+
+
+        //load library (pagination)
+        $this->load->library('pagination');
+
+
+        //ambil data pencarian
         if ($this->input->post('cari')) {
-            $data['sumberpokok'] = $this->Pokok_model->cariDatasumberpokok();
+            $data['cari'] = $this->input->post('cari');
+            $this->session->set_userdata('cari', $data['cari']);
+        } else {
+            $data['cari'] = $this->session->userdata('cari');
         }
+
+
+
+        //config
+        $this->db->like('nama_pangan', $data['cari']);
+        $this->db->or_like('urt', $data['cari']);
+        $this->db->or_like('gr', $data['cari']);
+        $this->db->or_like('karbohidrat', $data['cari']);
+        $this->db->or_like('protein', $data['cari']);
+        $this->db->or_like('lemak', $data['cari']);
+        $this->db->from('sumberpokok');
+
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 5;
+
+
+
+        //initialize
+        $this->pagination->initialize($config);
+
+
+        $data['start'] = $this->uri->segment(3);
+        $data['sumberpokok'] = $this->sumberpokok->getSumberPokok($config['per_page'], $data['start'], $data['cari']);
+
+
+
+
 
 
         $this->load->view('templates/header', $data);
@@ -33,6 +70,8 @@ class SumberPokok extends CI_Controller
         $this->load->view('sumberpokok/sumberpokok', $data);
         $this->load->view('templates/footer');
     }
+
+
 
     public function tambah()
     {
@@ -58,12 +97,17 @@ class SumberPokok extends CI_Controller
             redirect('sumberpokok');
         }
     }
+
+
+
     public function hapus($Id)
     {
         $this->Pokok_model->hapus($Id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('sumberpokok');
     }
+
+
 
 
     public function ubah($Id)

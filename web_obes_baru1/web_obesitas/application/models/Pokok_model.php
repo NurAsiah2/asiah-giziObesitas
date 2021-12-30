@@ -1,11 +1,39 @@
 <?php
 
-class Pokok_model extends CI_model
+class Pokok_model extends CI_Model
 {
     public function getAllSumberPokok()
     {
         return $this->db->get('sumberpokok')->result_array();
     }
+
+
+    public function getSumberPokok($limit, $start, $cari = null)
+    {
+        if ($cari) {
+            $this->db->like('nama_pangan', $cari);
+            $this->db->or_like('urt', $cari);
+            $this->db->or_like('gr', $cari);
+            $this->db->or_like('karbohidrat', $cari);
+            $this->db->or_like('protein', $cari);
+            $this->db->or_like('lemak', $cari);
+        }
+
+
+
+
+
+        return $this->db->get('sumberpokok', $limit, $start)->result_array();
+    }
+
+
+    public function countAllSumberPokok()
+    {
+        return $this->db->get('sumberpokok')->num_rows();
+    }
+
+
+
 
     public function tambahDataSumberpokok()
     {
@@ -46,17 +74,5 @@ class Pokok_model extends CI_model
 
         $this->db->where('Id', $this->input->post('Id'));
         $this->db->update('sumberpokok', $data);
-    }
-
-    public function cariDataSumberpokok()
-    {
-        $cari = $this->input->post('cari');
-        $this->db->like('nama_pangan', $cari);
-        $this->db->or_like('urt', $cari);
-        $this->db->or_like('gr', $cari);
-        $this->db->or_like('karbohidrat', $cari);
-        $this->db->or_like('protein', $cari);
-        $this->db->or_like('lemak', $cari);
-        return $this->db->get('sumberpokok')->result_array();
     }
 }
