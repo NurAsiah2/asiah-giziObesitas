@@ -19,6 +19,7 @@
 
                             <div class="card-body">
 
+
                                 <?php if (validation_errors()) : ?>
                                     <div class="alert alert-danger" role="alert">
                                         <?= validation_errors(); ?>
@@ -47,7 +48,8 @@
                                     <div class="form-group row">
                                         <label for="umur" class="col-sm-2 col-form-label">Umur</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" placeholder="Berdasarkan Tahun" id="umur" name="umur">
+                                            <input type="number" min="18" class="form-control" placeholder="Berdasarkan Tahun" id="umur" name="umur">
+
                                         </div>
                                     </div>
 
@@ -55,7 +57,7 @@
                                         <div class="row">
                                             <legend class="col-form-label col-sm-2 pt-0">Jenis aktivitas</legend>
                                             <div class="col-sm-10">
-                                                <input type="radio" name="aktivitas" value="aktivitas1">
+                                                <input type="radio" name="aktivitas" value="ringan">
                                                 Ringan
                                                 <p class="text-justify">Berjalan santai di rumah, kantor, atau pusat
                                                     perbelanjaan, Duduk bekerja di depan
@@ -73,7 +75,7 @@
                                                 </p>
 
 
-                                                <input type="radio" name="aktivitas" value="aktivitas2">
+                                                <input type="radio" name="aktivitas" value="sedang">
                                                 Sedang
                                                 <p class="text-justify">
                                                     cepat (kecepatan 5 km/jam) pada
@@ -90,7 +92,7 @@
                                                     bermain skate board, ski air, berlayar.
                                                 </p>
 
-                                                <input type="radio" name="aktivitas" value="aktivitas3">
+                                                <input type="radio" name="aktivitas" value="berat">
                                                 Berat
                                                 <p class="text-justify">
                                                     Berjalan dengan sangat cepat (kecepatan
@@ -112,81 +114,17 @@
                                         </div>
                                     </fieldset>
 
-
                                     <fieldset class="form-group">
                                         <div class="row">
                                             <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="jk" name="jk">
-                                                    <option value="1">Laki-laki</option>
-                                                    <option value="2">Perempuan</option>
-
-                                                </select>
+                                                <input type="radio" name="jk" value="Laki-laki">
+                                                Laki-laki
+                                                <input type="radio" name="jk" value="Perempuan">
+                                                Perempuan
                                             </div>
                                         </div>
                                     </fieldset>
-
-                                    <fieldset class="form-group">
-                                        <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">Karbohidrat</legend>
-                                            <div class=" col-sm-10">
-                                                <select class="form-control" id="karbohidrat" name="karbohidrat">
-                                                    <option value="1">0.60</option>
-                                                    <option value="2">0.61</option>
-                                                    <option value="3">0.62</option>
-                                                    <option value="4">0.63</option>
-                                                    <option value="5">0.64</option>
-                                                    <option value="6">0.65</option>
-                                                    <option value="7">0.66</option>
-                                                    <option value="8">0.67</option>
-                                                    <option value="9">0.68</option>
-                                                    <option value="10">0.69</option>
-                                                    <option value="11">0.70</option>
-                                                    <option value="12">0.71</option>
-                                                    <option value="13">0.72</option>
-                                                    <option value="14">0.73</option>
-                                                    <option value="15">0.74</option>
-                                                    <option value="16">0.75</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-
-
-                                    <fieldset class="form-group">
-                                        <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">Protein</legend>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" id="protein" name="protein">
-                                                    <option value="1">0.10</option>
-                                                    <option value="2">0.11</option>
-                                                    <option value="3">0.12</option>
-                                                    <option value="4">0.13</option>
-                                                    <option value="5">0.14</option>
-                                                    <option value="6">0.15</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="form-group">
-                                        <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">Lemak</legend>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" id="lemak" name="lemak">
-                                                    <option value="1">0.15</option>
-                                                    <option value="2">0.16</option>
-                                                    <option value="3">0.17</option>
-                                                    <option value="4">0.18</option>
-                                                    <option value="5">0.19</option>
-                                                    <option value="6">0.20</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-
 
 
 

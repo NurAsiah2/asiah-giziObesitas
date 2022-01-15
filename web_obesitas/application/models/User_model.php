@@ -5,8 +5,17 @@ class User_model extends CI_model
 
     public function getAllUser()
     {
+
         return $this->db->get('inputdata')->result_array();
     }
+
+    public function getOneUser($email)
+    {
+
+        $this->db->where('inputdata.id');
+        return $this->db->get('inputdata')->result_array();
+    }
+
 
     public function inputDataUser()
     {
@@ -16,9 +25,6 @@ class User_model extends CI_model
             "umur" => $this->input->post('umur'),
             "aktivitas" => $this->input->post('aktivitas'),
             "jk" => $this->input->post('jk'),
-            "karbohidrat" => $this->input->post('karbohidrat'),
-            "protein" => $this->input->post('protein'),
-            "lemak" => $this->input->post('lemak'),
         ];
 
         $this->db->insert('inputdata', $data);
